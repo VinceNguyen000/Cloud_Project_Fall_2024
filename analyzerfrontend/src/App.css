@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }
 
 .App-logo {
@@ -36,3 +38,56 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+}
+
+button {
+  width: 110px;
+  height: 30px;
+  background: #f97127;
+  font-family: "Courier New", Courier, monospace;
+  font-size: large;
+  width: 130px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #c9642d;
+  color: white;
+}
+
+.feature_block {
+  align-content: center;
+  width: 110px;
+  height: 30px;
+  background: hsl(0, 0%, 63%);
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 3px;
+}
+
+.visualize-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+select {
+  width: 110px;
+  height: 30px;
+  padding: 2px;
+}
+
+/* div {
+  border: 1px solid;
+} */
