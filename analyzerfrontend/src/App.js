@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
+import { featureServices } from "./services/featureService";
+import BarChart from "./containers/BarChart";
 
 function App() {
   const [file, setFile] = useState(null);
+  const [featureList, setFeatureList] = useState(null)
+  const [barChartData, setBarChartData] = useState(null)
+  const [dataSetName, setDataSetName] = useState(null)
+  const [selectedFeatures, setSelectedFeatures] = useState({ "feature1": null, "feature2": null, "feature3": null })
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -12,6 +18,22 @@ function App() {
     event.preventDefault();
     setFile(event.dataTransfer.files[0]);
   };
+
+  const handleUpload = async () => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('table_name', dataSetName)
+    const uploadResponse = await featureServices.uploadDataset(formData)
+
+    const response = await featureServices.getFeatureList({ table_name: "timeSeriesData" })
+    setFeatureList(response?.data?.data)
+  }
+
+  const onVisualize = async () => {
+    const barChartResponse = await featureServices.getChartData({ table_name: "timeSeriesData", feature_list: Object.values(selectedFeatures) })
+    setBarChartData(barChartResponse?.data?.data)
+  }
+
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -34,6 +56,7 @@ function App() {
         onDragOver={handleDragOver}
       >
         <p>Click to choose your CSV file or drop it here</p>
+        <input type="text" onChange={(e) => { console.log(e.target.value); setDataSetName(e.target.value) }} />
         <input
           type="file"
           accept=".csv"
@@ -54,6 +77,12 @@ function App() {
         >
           Choose File
         </label>
+        {dataSetName && file && <button style={{
+          backgroundColor: "#007BFF",
+          color: "white",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }} onClick={handleUpload}>Upload</button>}
         {file && (
           <p style={{ marginTop: "10px" }}>Selected File: {file.name}</p>
         )}
@@ -78,10 +107,11 @@ function App() {
               height: "30px",
               borderRadius: "5px",
             }}
+            onChange={(e) => { setSelectedFeatures({ ...selectedFeatures, feature1: e.target.value }) }}
           >
-            <option value="">Select Type</option>
-            <option value="numerical">Numerical</option>
-            <option value="categorical">Categorical</option>
+            {featureList && featureList.map((item) => {
+              return <option value={item}>{item}</option>
+            })}
           </select>
         </div>
         <div>
@@ -94,10 +124,11 @@ function App() {
               height: "30px",
               borderRadius: "5px",
             }}
+            onChange={(e) => { setSelectedFeatures({ ...selectedFeatures, feature2: e.target.value }) }}
           >
-            <option value="">Select Type</option>
-            <option value="numerical">Numerical</option>
-            <option value="categorical">Categorical</option>
+            {featureList && featureList.map((item) => {
+              return <option value={item}>{item}</option>
+            })}
           </select>
         </div>
         <div>
@@ -110,19 +141,20 @@ function App() {
               height: "30px",
               borderRadius: "5px",
             }}
+            onChange={(e) => { setSelectedFeatures({ ...selectedFeatures, feature3: e.target.value }) }}
           >
-            <option value="">Select Type</option>
-            <option value="numerical">Numerical</option>
-            <option value="categorical">Categorical</option>
+            {featureList && featureList.map((item) => {
+              return <option value={item}>{item}</option>
+            })}
           </select>
         </div>
         <div className="visualize-container">
-          <button class="visualize-button">Visualize</button>
+          <button class="visualize-button" onClick={onVisualize}>Visualize</button>
         </div>
       </div>
 
       {/* Graph Section */}
-      <div
+      {/* <div
         style={{
           marginTop: "30px",
           textAlign: "center",
@@ -136,9 +168,14 @@ function App() {
           alignItems: "center",
           justifyContent: "center",
         }}
-      >
-        <h2>Graph here</h2>
+      > */}
+      <div
+        style={{
+          margin: "10px",
+        }}>
+        {barChartData && <BarChart data={barChartData} sx={{ "width": "100%", "height": "100%" }} />}
       </div>
+      {/* </div>   */}
       <div>
         <select
           style={{

@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from visualizer.views import upload_files, get_chart_data, get_feature_list
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("uploadfiles/", upload_files),
+    path("getchartdata", get_chart_data),
+    path("getfeaturelist", get_feature_list),
 ]
