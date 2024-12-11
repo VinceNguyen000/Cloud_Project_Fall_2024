@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lively-cumulus-435922-v8",
+  "private_key_id": "d9a2e97576810397749b64e1008ad5345c171fd6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCY2ZuU4dtQ5HPp\n6p73gRLeOGk7VZ4sLe/cNWfUnoT0oyAJ++b2E8fKJdlw4smbtGlMaChxvDzYmqxA\nGG4S79ISN0PErIo9DZQMOMNngZxqOuigX0WoEjjHvno7j75ZeMWplC4bXVexrJAs\nF3iS9J+F/XsP+FBLgIWoN/sjiif3puHBjSGS0z8Jk2HcPTMFUSxDF8ehRTRdcKUJ\nXGCg9WP0rix/pPSXcJl0IETuzz0a4RTKjXU6V/ZsoPrGhMhbaIqtq+wSa+sdvRX7\ngokqIZwYuUd8VbCC1Qx17n3lHHe5jmO5ncZv41UKXPhLwSMz4UvwLyutFjFGlWHn\nsS9QndcbAgMBAAECggEACnrlIXyo6m93iSLWmnbFoenxQSm6KiJOL2WUBG6IBDQJ\nFtYoPFgX20LkGUrbcusYSy5bE41KCLn2NIDYT0EVQL18TohcBBqhu4LK1xZ6cIgw\negp+PqtdLEjhnaLZ9M2Ek/9+d87bG+oOio9ja4QNSgUawnoOm1apE2MfO40V93Nl\nEjyz71z/YadkQ3B28ZCH5WDurrvrNFRdokCHSF0ne95+p/wB9bmzYsF6fMgbA/Iz\nP/wZjTGiUoOJenV08ouQzvIlsgTp7LACrfxMp6RdOQRP493fR0yJEWPJF1bbKQbu\nyFHkIJVXB+5mRjXjB5OjjfX7LkkpElqTuGBOUeCboQKBgQDWFotYmnsR9DwRi0+x\ndy5C5UqQBALgt8Za4Y6/KdgxPDs0iiV55yGQO+jIIo1O9GJhIF46Zsb80Irikz7E\n5HfyYqQS91PXWApopDKXbgLbv+xDuNCpmlYwM3yL7GMZN6SPo9+R7xazZEM2tgEd\nVsxYNSwn5ygNI9yM1Nt5uBGG+wKBgQC2xf7l76kBF83C86cnQRWVI8H9jRobzR0d\n/wCsx7tb2jSrTjFYsS7BaO9R06iTTo/WxugSGpH/5Ye5V/ApzlyBtA8/C9kZSu3D\niBSvrhqoOfLvL90nM3rv3KVc3vKYxGS55GyureTWchcChp10yd96JfkfRmjHnRZu\nhzJrNaZ2YQKBgQCHghmNaaqAgMEMscstnyxO92cspP1VU71fhOmfolLPRzqKVO7H\nrD6YVvNOyl/7G8CxjZVXDfrhxvZB18WhRqONblZAEwCki3t7JINJSj7Q7TgU3YRl\n9eSb+drZjjRjn86vhKBcdKM/xTSuCqHF+ky5gF6Em1HEj3BoS8rnzlR5xQKBgDD3\nfsDvomGulOvEB2ZW44dfWxuo7/O+0iw1I2Mm56VGIpI6krHmVlZu3J8Zi7Jbe+HY\nzFf9UlwyjFg1nRw2M0Z0jRkg/XrvPiAClzgx9uZXECTQt/lGq4sTnCHzgR84jpvW\n/N8Xq5VgX5XHpuuhIgRBpCqi3HOOPHJEOlfKudxBAoGBAK9duCP8/ch/AxpmuAq9\n8OLPRtdN9BJzbOvu1dcW2gTM/nLvvDmCiFrHxkYEbfRBmCfOYJGmCwEvNHC60cFl\n+KGVVSmb62BtcrPuWNLTeQH3yFdJnOLLG8wePLAAKR7F3fpwMGY7tqDjBiTJk3jW\nRWsQvPgScQCFq+nA5IfsSTPt\n-----END PRIVATE KEY-----\n",
+  "client_email": "bigqueryaccess@lively-cumulus-435922-v8.iam.gserviceaccount.com",
+  "client_id": "115060552662171240922",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bigqueryaccess%40lively-cumulus-435922-v8.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

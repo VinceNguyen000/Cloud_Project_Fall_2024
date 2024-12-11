@@ -17,11 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from visualizer.views import upload_files, get_chart_data, get_feature_list
+from visualizer.views import (upload_files, get_chart_data, get_feature_list, register, login, create_init_tables, save_dashboard_preferences,
+                              getDatasetList, getLinechartData, getBarChartData, get_dashboard_data)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("register/", register),
+    path("login/", login),
     path("uploadfiles/", upload_files),
     path("getchartdata", get_chart_data),
     path("getfeaturelist", get_feature_list),
+    path('createinittables', create_init_tables),
+    path('savedashboardpref/', save_dashboard_preferences),
+    path('getdatasetlist/', getDatasetList),
+    path('getlinechartdata', getLinechartData),
+    path('getbarchartdata', getBarChartData),
+    path('getdashboarddata', get_dashboard_data)
 ]

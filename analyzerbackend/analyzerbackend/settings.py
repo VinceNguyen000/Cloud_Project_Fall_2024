@@ -132,3 +132,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSV_STORAGE = os.getenv('CSV_STORAGE')
 BIG_QUERY_DB_ID = os.getenv('BIG_QUERY_DB_ID')
+SERVICE_ACCOUNT_GOOGLE = os.getenv('SERVICE_ACCOUNT_GOOGLE')

@@ -1,0 +1,23 @@
+FROM python:3.10
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# # Install Google Cloud CLI
+# RUN apt-get update && apt-get install -y curl gnupg && \
+#     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
+#     echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+#     apt-get update && apt-get install -y google-cloud-sdk
+
+# RUN gcloud auth activate-service-account --key-file=/app/bigQueryAccessKey.json
+
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/bigQueryAccessKey.json
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
