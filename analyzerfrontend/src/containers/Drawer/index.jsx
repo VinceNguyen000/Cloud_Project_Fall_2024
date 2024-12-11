@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ApplicationDrawer(props) {
 
-    const { open, setOpen, datasetNames, setPopupOpen, getDatasetConfigs } = props
+    const { open, setOpen, datasetNames, setPopupOpen, getDatasetConfigs, getDatasetNames, refreshNamesLoadDataset } = props
 
     console.log(getDatasetConfigs, "getdatasetconfig")
 

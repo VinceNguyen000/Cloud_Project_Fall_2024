@@ -299,7 +299,7 @@ def get_feature_list(request):
 
     # Extract column names from the schema
     all_column_names = [field.name for field in table.schema]
-    integer_only_column_names = [field.name for field in table.schema if(field.field_type=="INTEGER")]
+    integer_only_column_names = [field.name for field in table.schema if(field.field_type=="INTEGER" or field.field_type=="FLOAT64")]
 
     return JsonResponse(data = {"all_names": all_column_names, "integer_names": integer_only_column_names})
 
@@ -434,7 +434,8 @@ def get_dashboard_data(request):
     result = query_job.result()
 
     dataset_list = [rows["dashboard_preferences"] for rows in result]
-    dataset_list = dataset_list[0]
+    if dataset_list:
+        dataset_list = dataset_list[0]
 
     return JsonResponse({"data": dataset_list})
 

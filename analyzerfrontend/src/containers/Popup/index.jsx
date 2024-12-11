@@ -4,13 +4,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ApplicationStepper } from "../Stepper";
 
 function FullScreenPopup(props) {
-    const { popupOpen, setPopupOpen } = props
-
+    const { popupOpen, setPopupOpen, getDatasetConfigs, refreshNamesLoadDataset } = props
   return (
-    <div>
-
+    <>
       {/* Fullscreen popup */}
-      <Dialog fullScreen open={popupOpen} onClose={()=>setPopupOpen(false)}>
+      <Dialog fullWidth maxWidth={"md"} open={popupOpen} onClose={()=>setPopupOpen(false)}>
         <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="h6" style={{ flexGrow: 1 }}>
@@ -24,10 +22,10 @@ function FullScreenPopup(props) {
 
         {/* Content inside the popup */}
         <div style={{ padding: "16px" }}>
-          <ApplicationStepper/>
+          <ApplicationStepper getDatasetConfigs={getDatasetConfigs} refreshNamesLoadDataset={refreshNamesLoadDataset} setPopupOpen={setPopupOpen}/>
         </div>
       </Dialog>
-    </div>
+      </>
   );
 }
 

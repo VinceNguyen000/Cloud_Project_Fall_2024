@@ -15,7 +15,7 @@ export default function ApplicationAppBar(props) {
     const [open, setOpen] = React.useState(false);
     const [popupOpen, setPopupOpen] = React.useState(false);
 
-    const {datasetNames, getDatasetConfigs} = props
+    const {datasetNames, getDatasetConfigs, getDatasetNames, refreshNamesLoadDataset} = props
 
     return (
         <>
@@ -39,8 +39,8 @@ export default function ApplicationAppBar(props) {
             </AppBar>
         </Box>
         <ApplicationDrawer open={open} setOpen={setOpen} datasetNames={datasetNames} setPopupOpen={setPopupOpen}
-        getDatasetConfigs={getDatasetConfigs}/>
-        <FullScreenPopup popupOpen={popupOpen} setPopupOpen={setPopupOpen}/>
+        getDatasetConfigs={getDatasetConfigs} getDatasetNames={getDatasetNames} refreshNamesLoadDataset={refreshNamesLoadDataset}/>
+        <FullScreenPopup popupOpen={popupOpen} setPopupOpen={setPopupOpen} getDatasetConfigs={getDatasetConfigs} refreshNamesLoadDataset={refreshNamesLoadDataset}/>
         </>
     );
 }

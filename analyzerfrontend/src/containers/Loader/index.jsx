@@ -1,10 +1,11 @@
 import React from "react";
 import { Backdrop, CircularProgress, Typography } from "@mui/material";
 
-function Loader({ open, message = "Loading..." }) {
+function Loader({ open, fullOverlay = true, message = "Loading..." }) {
+  console.log(fullOverlay, "fulloverloa")
   return (
     <Backdrop
-      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      sx={{ color: "#fff", zIndex: fullOverlay ? 1301 : 1300 }}
       open={open}
     >
       <CircularProgress color='inherit' />

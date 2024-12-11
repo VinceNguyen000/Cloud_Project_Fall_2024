@@ -15,7 +15,9 @@ import { LoaderContext } from '../../App';
 const steps = ['Upload a Dataset', 'Configure Charts for your Dashboard'];
 
 function HorizontalNonLinearStepper(props) {
-    const { userData, setIsLoading } = useContext(LoaderContext)
+    const {refreshNamesLoadDataset, setPopupOpen} = props
+    
+    const { userData, setIsLoading, getDatasetConfigs } = useContext(LoaderContext)
 
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
@@ -119,6 +121,8 @@ function HorizontalNonLinearStepper(props) {
             [activeStep]: true,
         });
         setIsLoading(false)
+        refreshNamesLoadDataset(datasetId)
+        setPopupOpen(false)
     }
 
     const disableNext = () => {
@@ -157,7 +161,8 @@ function HorizontalNonLinearStepper(props) {
                             {Object.keys(newCharts).length != 0 &&
                                 <ApplicationAccordion newCharts={newCharts}
                                     setNewCharts={setNewCharts}
-                                    featureList={featureList} />
+                                    featureList={featureList} 
+                                    />
 
                             }
                         </Grid2>

@@ -40,13 +40,27 @@ const InsideLayout = (props) => {
         setIsLoading(false)
     }
 
+    const refreshNamesLoadDataset = async(datasetId) => {
+        setIsLoading(true)
+        const response = await featureServices.getDatasetNames({user_id: userData.userId})
+        console.log(response, "response dataset")
+        setDatasetNames(response.data.data)
+        setIsLoading(false)
+
+        const index = response.data.data.findIndex(item=> item.id == datasetId)
+        if(index){
+            getDatasetConfigs(response.data.data[index])
+        }
+
+    }
+
     useEffect(()=>{
         getDatasetNames()
     },[])
 
     return (
         <>
-            <ApplicationAppBar datasetNames={datasetNames} getDatasetConfigs={getDatasetConfigs}/>
+            <ApplicationAppBar datasetNames={datasetNames} getDatasetConfigs={getDatasetConfigs} getDatasetNames={getDatasetNames} refreshNamesLoadDataset={refreshNamesLoadDataset}/>
             <Grid2 sx={{ "marginTop": "64px", "marginLeft": "20px", "marginRight": "20px" }}>
                 <Dashboard currentDashboardPref={currentDashboardPref} currentDatasetName={currentDatasetName} />
             </Grid2>
