@@ -5,6 +5,7 @@ from django.http import HttpResponse, QueryDict, JsonResponse
 from django.contrib.auth import authenticate, login
 
 from google.cloud import bigquery
+from google.auth import load_credentials_from_file
 from django.http import JsonResponse
 from django.conf import settings
 from django.db import transaction
@@ -52,7 +53,9 @@ def register(request):
 
         rows = [{"id": str(uuid.uuid4()), "username": data["username"], "password":encrypted_password}]
 
-        client = bigquery.Client()
+        credentials, project = load_credentials_from_file('/home/ubuntu/.config/gcloud/application_default_credentials.json')
+
+        client = bigquery.Client(credentials=credentials, project=project)
 
         # get User table
         user_table = client.get_table(table_id)
