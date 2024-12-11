@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const serverUrl = 'http://localhost:8000/'
+const serverUrl = 'http://44.201.124.105/'
 
 const makeRequest = async (method, url, postData = null, multipart = false) => {
     const response = await axios({
