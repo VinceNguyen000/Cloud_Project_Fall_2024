@@ -18,7 +18,7 @@ from .auth import hash_password, verify_password
 import uuid
 import numpy as np
 
-csv_storage = '/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend//analyzerbackend/csvstorage/'
+csv_storage = '/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/analyzerbackend/csvstorage/'
 
 import re
 

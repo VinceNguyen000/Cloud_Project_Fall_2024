@@ -29,7 +29,7 @@ export default function BasicBars(props) {
   }, [barChartPreferences])
 
   return (
-    isLoading ? <Box sx={{width: 500, height: 300, display: "flex"}} alignItems={"center"} justifyContent={"center"}><CircularProgress/></Box> :  
+    isLoading ? <Box sx={{width: 500, height: 350, display: "flex"}} alignItems={"center"} justifyContent={"center"}><CircularProgress/></Box> :  
     barChartData &&
       <BarChart 
       sx={{padding: "10px"}}
@@ -58,7 +58,7 @@ export default function BasicBars(props) {
       ]}
       dataset={barChartData.data}
       width={500}
-      height={300}
+      height={350}
     />
   );
 }

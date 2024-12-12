@@ -48,7 +48,7 @@ export default function BasicLines(props) {
   // }
 
   return (
-    isLoading ? <Box sx={{width: 500, height: 300, display: "flex"}} alignItems={"center"} justifyContent={"center"}><CircularProgress/></Box> :  
+    isLoading ? <Box sx={{width: 500, height: 350, display: "flex"}} alignItems={"center"} justifyContent={"center"}><CircularProgress/></Box> :  
     lineChartData &&
     <LineChart
     sx={{padding: "10px"}}
