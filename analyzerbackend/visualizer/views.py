@@ -55,8 +55,6 @@ def register(request):
 
         credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
 
-        print(credentials, project)
-
         client = bigquery.Client(credentials=credentials, project=project)
 
         # get User table
@@ -93,7 +91,9 @@ def register(request):
 def login(request):
     data = json.loads(request.body)
 
-    client = bigquery.Client()
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.users"
 
@@ -129,7 +129,10 @@ def upload_files(request):
         pandas_dataframe.columns = cleaned_dataframe_labels
 
         # Construct a BigQuery client object.
-        client = bigquery.Client()
+        credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+        client = bigquery.Client(credentials=credentials, project=project)
+
         table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{table_name}"
         table = client.load_table_from_dataframe(pandas_dataframe, table_id)  # Make an API request.
 
@@ -160,7 +163,9 @@ def get_chart_data(request):
     table_name = request.GET.get("table_name", None)
 
     # Construct a BigQuery client object.
-    client = bigquery.Client()
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     # TODO(developer): Set table_id to the ID of the table to create.
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{table_name}"
@@ -198,7 +203,9 @@ def get_chart_data(request):
 
 def create_init_tables(request):
 
-    client = bigquery.Client()
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     # user table creation
     user_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.users"
@@ -236,7 +243,9 @@ def create_init_tables(request):
 def save_dashboard_preferences(request):
     data = json.loads(request.body)
 
-    client = bigquery.Client()
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     # create a entry in the dataset table
     preference_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.preferences"
@@ -279,7 +288,9 @@ def save_dashboard_preferences(request):
 def getDatasetList(request):
     user_id = request.GET.get("user_id", None)
 
-    client = bigquery.Client(project='lively-cumulus-435922-v8')
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+    
+    client = bigquery.Client(credentials=credentials, project=project)
 
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.datasets"
     print(table_id, "table id")
@@ -296,7 +307,9 @@ def getDatasetList(request):
 def get_feature_list(request):
     dataset_name = request.GET.get("dataset_name", None)
 
-    client = bigquery.Client()
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
 
     # Get table metadata
@@ -321,7 +334,9 @@ def getLinechartData(request):
     dependent_3 = preferences.get('lineChartDependent3', None)
 
     # Initialize a BigQuery client
-    client = bigquery.Client(project='lively-cumulus-435922-v8')
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     # Define your BigQuery table
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
@@ -362,7 +377,9 @@ def getBarChartData(request):
     dependent_3 = preferences.get('barChartDependent3', None)
 
     # Initialize a BigQuery client
-    client = bigquery.Client(project='lively-cumulus-435922-v8')
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     # Define your BigQuery table
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
@@ -429,7 +446,9 @@ def getBarChartData(request):
 def get_dashboard_data(request):
     dataset_id = request.GET.get("dataset_id", None)
 
-    client = bigquery.Client(project='lively-cumulus-435922-v8')
+    credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+    client = bigquery.Client(credentials=credentials, project=project)
 
     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.preferences"
 
