@@ -152,6 +152,9 @@ def upload_files(request):
 
         os.remove(file_storage_path)
 
+        import time
+        time.sleep(5)
+
         return JsonResponse(data={"dataset_id": dataset_id})
     
 def get_chart_data(request):
@@ -286,9 +289,6 @@ def save_dashboard_preferences(request):
     return HttpResponse("Dashboard preferences saved successfully")
 
 def getDatasetList(request):
-    import time
-    time.sleep(5)
-    
     user_id = request.GET.get("user_id", None)
 
     credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
@@ -308,6 +308,7 @@ def getDatasetList(request):
     return JsonResponse({"data": dataset_list})
 
 def get_feature_list(request):
+
     dataset_name = request.GET.get("dataset_name", None)
 
     credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
