@@ -18,7 +18,7 @@ from .auth import hash_password, verify_password
 import uuid
 import numpy as np
 
-csv_storage = settings.CSV_STORAGE
+csv_storage = '/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend//analyzerbackend/csvstorage/'
 
 import re
 
@@ -47,13 +47,15 @@ def register(request):
         data = json.loads(request.body)
         print(data, "dtaa")
 
-        table_id = f"{settings.BIG_QUERY_DB_ID}users"
+        table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.users"
 
         encrypted_password = hash_password(data["password"])
 
         rows = [{"id": str(uuid.uuid4()), "username": data["username"], "password":encrypted_password}]
 
-        credentials, project = load_credentials_from_file('/home/ubuntu/.config/gcloud/application_default_credentials.json')
+        credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
+
+        print(credentials, project)
 
         client = bigquery.Client(credentials=credentials, project=project)
 
@@ -93,7 +95,7 @@ def login(request):
 
     client = bigquery.Client()
 
-    table_id = f"{settings.BIG_QUERY_DB_ID}users"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.users"
 
     # check if the user name is already present in the database
     select_username_query = f"""SELECT * FROM `{table_id}` WHERE username='{data["username"]}'"""
@@ -128,11 +130,11 @@ def upload_files(request):
 
         # Construct a BigQuery client object.
         client = bigquery.Client()
-        table_id = f"{settings.BIG_QUERY_DB_ID}{table_name}"
+        table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{table_name}"
         table = client.load_table_from_dataframe(pandas_dataframe, table_id)  # Make an API request.
 
         # create a entry in the dataset table
-        dataset_table_id = f"{settings.BIG_QUERY_DB_ID}datasets"
+        dataset_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.datasets"
         dataset_table_schema = [
             bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
             bigquery.SchemaField("dataset_name", "STRING", mode="REQUIRED"),
@@ -161,7 +163,7 @@ def get_chart_data(request):
     client = bigquery.Client()
 
     # TODO(developer): Set table_id to the ID of the table to create.
-    table_id = f"{settings.BIG_QUERY_DB_ID}{table_name}"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{table_name}"
 
     # Define a query to fetch rows
     query = f"SELECT {feature_list_string if feature_list_string else '*'} FROM `{table_id}` LIMIT 10"  # Adjust LIMIT as needed
@@ -184,7 +186,7 @@ def get_chart_data(request):
 
 #     client = bigquery.Client()
 
-#     table_id = f"{settings.BIG_QUERY_DB_ID}{table_name}"
+#     table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{table_name}"
 
 #     # Get table metadata
 #     table = client.get_table(table_id)
@@ -199,7 +201,7 @@ def create_init_tables(request):
     client = bigquery.Client()
 
     # user table creation
-    user_table_id = f"{settings.BIG_QUERY_DB_ID}users"
+    user_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.users"
     user_table_schema = [
         bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("username", "STRING", mode="REQUIRED"),
@@ -209,7 +211,7 @@ def create_init_tables(request):
     user_table_object = bigquery.Table(user_table_id, schema=user_table_schema)
     user_table = client.create_table(user_table_object)
 
-    dataset_table_id = f"{settings.BIG_QUERY_DB_ID}datasets"
+    dataset_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.datasets"
     dataset_table_schema = [
         bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("dataset_name", "STRING", mode="REQUIRED"),
@@ -219,7 +221,7 @@ def create_init_tables(request):
     dataset_table_object = bigquery.Table(dataset_table_id, schema=dataset_table_schema)
     dataset_table = client.create_table(dataset_table_object)
 
-    preferences_id = f"{settings.BIG_QUERY_DB_ID}preferences"
+    preferences_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.preferences"
     preferences_schema = [
         bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("dataset_id", "STRING", mode="REQUIRED"),
@@ -237,7 +239,7 @@ def save_dashboard_preferences(request):
     client = bigquery.Client()
 
     # create a entry in the dataset table
-    preference_table_id = f"{settings.BIG_QUERY_DB_ID}preferences"
+    preference_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.preferences"
     preference_table_schema = [
         bigquery.SchemaField("id", "STRING", mode="REQUIRED"),
         bigquery.SchemaField("dataset_id", "STRING", mode="REQUIRED"),
@@ -248,7 +250,7 @@ def save_dashboard_preferences(request):
 
     errors = client.insert_rows(preference_table_id, rows, preference_table_schema)
 
-    # dataset_table_id = f"{settings.BIG_QUERY_DB_ID}datasets"
+    # dataset_table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.datasets"
     # dashboard_preferences_json = json.dumps(data["dashboard_preferences"])
     # # dashboard_preferences_json = data["dashboard_preferences"]
     
@@ -279,7 +281,7 @@ def getDatasetList(request):
 
     client = bigquery.Client(project='lively-cumulus-435922-v8')
 
-    table_id = f"{settings.BIG_QUERY_DB_ID}datasets"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.datasets"
     print(table_id, "table id")
 
     select_query = f"""SELECT id, dataset_name FROM `{table_id}` WHERE user_id='{user_id}'"""
@@ -295,7 +297,7 @@ def get_feature_list(request):
     dataset_name = request.GET.get("dataset_name", None)
 
     client = bigquery.Client()
-    table_id = f"{settings.BIG_QUERY_DB_ID}{dataset_name}"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
 
     # Get table metadata
     table = client.get_table(table_id)
@@ -322,7 +324,7 @@ def getLinechartData(request):
     client = bigquery.Client(project='lively-cumulus-435922-v8')
 
     # Define your BigQuery table
-    table_id = f"{settings.BIG_QUERY_DB_ID}{dataset_name}"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
 
     # Load the table into a DataFrame
     query = f"SELECT * FROM `{table_id}` LIMIT 10"
@@ -363,7 +365,7 @@ def getBarChartData(request):
     client = bigquery.Client(project='lively-cumulus-435922-v8')
 
     # Define your BigQuery table
-    table_id = f"{settings.BIG_QUERY_DB_ID}{dataset_name}"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.{dataset_name}"
 
     # Load the table into a DataFrame
     query = f"SELECT * FROM `{table_id}` LIMIT 10"
@@ -429,7 +431,7 @@ def get_dashboard_data(request):
 
     client = bigquery.Client(project='lively-cumulus-435922-v8')
 
-    table_id = f"{settings.BIG_QUERY_DB_ID}preferences"
+    table_id = f"lively-cumulus-435922-v8.BigQueryVisualizationDb.preferences"
 
     select_query = f"""SELECT id, dashboard_preferences FROM `{table_id}` WHERE dataset_id='{dataset_id}'"""
 
