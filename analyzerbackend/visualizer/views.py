@@ -286,6 +286,9 @@ def save_dashboard_preferences(request):
     return HttpResponse("Dashboard preferences saved successfully")
 
 def getDatasetList(request):
+    import time
+    time.sleep(5)
+    
     user_id = request.GET.get("user_id", None)
 
     credentials, project = load_credentials_from_file('/home/ubuntu/Cloud_Project_Fall_2024/analyzerbackend/visualizer/gg.json')
